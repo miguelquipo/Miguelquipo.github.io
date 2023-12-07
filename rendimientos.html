@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ingreso de Rendimientos</title>
+  <link rel="stylesheet" href="./CSS/stykesRendi.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <!-- Aquí puede ir tu logo o nombre del sitio -->
+      <!-- ... -->
+    </div>
+    <div class="menu-btn">
+      <div class="menu-icon"></div>
+    </div>
+    <div class="menu">
+      <!-- Opción de Menú -->
+      <a href="#"><i class="fas fa-home"></i> Inicio</a>
+      <a href="./insert.html"><i class="fas fa-shopping-cart"></i> Ingreso de Productos</a>
+      <a href="./rendimientos.html"><i class="fa-solid fa-clipboard"></i> Rendimientos</a>
+    </div>
+    <div class="user-login">
+        <!-- Icono de Inicio de Sesión -->
+        <a href="./ingresoTrb.html"><i class="fas fa-user-circle"></i></a>
+      </div>
+
+  </header>
+
+  <h1>Ingreso de Rendimientos</h1>
+
+  <div class="container">
+    <form id="search-form">
+      <div class="form-group">
+        <label for="search-cedula">Número de Cédula:</label>
+        <input type="text" id="search-cedula" placeholder="Ingrese el número de cédula">
+      </div>
+      <div class="form-group">
+        <label for="search-product-type">Tipo de Producto:</label>
+        <select id="search-product-type">
+          <option value="Electrónica">Electrónica</option>
+          <option value="Ropa">Ropa</option>
+          <option value="Hogar">Hogar</option>
+          <option value="Comida">Comida</option>
+        </select>
+      </div>
+      <button type="button" onclick="searchRendimientos()">Buscar</button>
+    </form>
+
+    <ul id="rendimientos-list">
+      <!-- Aquí se listarán los rendimientos -->
+    </ul>
+  </div>
+
+  <div class="table-container">
+    <h2>Tabla de Rendimientos</h2>
+    <table id="rendimientos-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Nombre del Producto</th>
+          <th>Código de Barras</th>
+          <th>Trabajador</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aquí se llenará la tabla con los datos -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
