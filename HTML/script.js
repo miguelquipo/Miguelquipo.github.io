@@ -101,39 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
- 
-  function readBarcode(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-  
-    const image = new Image();
-    image.onload = function() {
-      Quagga.decodeSingle({
-        src: image.src,
-        numOfWorkers: 0,
-        locate: true,
-        inputStream: {
-          size: 800
-        },
-        decoder: {
-          readers: ['ean_reader'] // Tipo de código de barras a leer (puedes cambiarlo según tu necesidad)
-        },
-      }, function(result) {
-        if (result && result.codeResult) {
-          alert('Código de barras detectado: ' + result.codeResult.code);
-        } else {
-          alert('No se pudo detectar ningún código de barras.');
-        }
-      });
-    };
-  
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      image.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-  
   /*BARRA MENU*/
   document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.querySelector('.menu-btn');
@@ -220,3 +187,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
+
+  //MOSTRAR DATOS DE LA TABLA PRODUCTOS
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('obtenerProductos.php')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#product-table tbody');
+            tableBody.innerHTML = '';
+
+            data.forEach(producto => {
+                const row = `
+                    <tr>
+                        <td>${producto.nombre_producto}</td>
+                        <td>${producto.tipo_producto}</td>
+                        <td>${producto.codigoQR}</td>
+                        <td>${producto.fecha_ingreso}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error('Error al obtener los productos:', error));
+});
+
