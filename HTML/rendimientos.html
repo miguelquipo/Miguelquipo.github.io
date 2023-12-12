@@ -23,7 +23,7 @@
     <div class="menu">
       <!-- Opción de Menú -->
       <a href="#"><i class="fas fa-home"></i> Inicio</a>
-      <a href="./insert.php"><i class="fas fa-shopping-cart"></i> Ingreso de Productos</a>
+      <a href="./ingProductos.html"><i class="fas fa-shopping-cart"></i> Ingreso de Productos</a>
       <a href="./rendimientos.html"><i class="fa-solid fa-clipboard"></i> Rendimientos</a>
     </div>
     <div class="user-login">
@@ -42,13 +42,8 @@
         <input type="text" id="search-cedula" placeholder="Ingrese el número de cédula">
       </div>
       <div class="form-group">
-        <label for="search-product-type">Tipo de Producto:</label>
-        <select id="search-product-type">
-          <option value="Electrónica">Electrónica</option>
-          <option value="Ropa">Ropa</option>
-          <option value="Hogar">Hogar</option>
-          <option value="Comida">Comida</option>
-        </select>
+        <label for="search-product-type" type="text">Tipo de Producto:</label>
+        <input type="text" id="search-producto" placeholder="Ingrese el número de cédula">
       </div>
       <button type="button" onclick="searchRendimientos()">Buscar</button>
     </form>
@@ -63,10 +58,12 @@
     <table id="rendimientos-table">
       <thead>
         <tr>
-          <th>Fecha</th>
+          <th>Num</th>
+          <th>Cantidad</th>
           <th>Nombre del Producto</th>
-          <th>Código de Barras</th>
           <th>Trabajador</th>
+          <th>Fecha</th>
+          <th>Hora</th>
         </tr>
       </thead>
       <tbody>

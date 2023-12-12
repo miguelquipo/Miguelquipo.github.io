@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function searchRendimientos() {
     const searchCedula = document.getElementById('search-cedula').value;
-    const searchProductType = document.getElementById('search-product-type').value;
+    const searchProductType = document.getElementById('search-producto').value;
   
     // Aquí debes realizar la lógica de búsqueda de los rendimientos basándote en los valores ingresados
     
@@ -210,4 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error al obtener los productos:', error));
 });
+
+
+
 

@@ -23,7 +23,7 @@
         <div class="menu">
           <!-- Opción de Menú -->
           <a href="#"><i class="fas fa-home"></i> Inicio</a>
-          <a href="./insert.php"><i class="fas fa-shopping-cart"></i> Ingreso de Productos</a>
+          <a href="#"><i class="fas fa-shopping-cart"></i> Ingreso de Productos</a>
           <a href="./rendimientos.html"><i class="fa-solid fa-clipboard"></i> Rendimientos</a>
         </div>
         <div class="user-login">
@@ -32,53 +32,49 @@
         </div>
 
       </header>
-      <h1>CRUD de Productos</h1>
+      <h1>Ingreso Productos</h1>
 
        <div class="container">
-        <form id="crud-form" method="post" action="PHP/ingresoProd.php">
+        <form id="crud-form" method="post" action="./PHP/ingresoProd.php">
             <input type="text" id="product-name" name="product-name" placeholder="Nombre del Producto" requiered>
-            <select id="product-type" name="product-type" requiered>
-                <?php
-                include './PHP/db.php';
-                $sql = "SELECT id_tipo, nombre_tipo FROM tipos_producto";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<option value="' . $row['id_tipo'] . '">' . $row['nombre_tipo'] . '</option>';
-                    }
-                }
-                $conn->close();
-                ?>
-            </select>
-            <input name="qr-code" type="text" placeholder="Codigo Var" id="qr-code" >
-            <input type="date" id="entry-date" name="fecha-creacion">
-            
-    
+            <input type="datetime-local" id="entry-date" name="fecha-creacion">
             <button type="submit">Agregar Producto</button>
         </form>
       </div>
     
-        
-  </div>
   <div class="table-container">
   <h2>Tabla de Productos</h2>
   <table id="product-table">
     <thead>
       <tr>
-        <th>Nombre</th>
-        <th>Tipo</th>
-        <th>Código QR</th>
-        <th>Fecha de Ingreso</th>
+        <th>ID Producto</th>
+        <th>Nombre Producto</th>
+        <th>Fecha Creacion Producto</th>
       </tr>
     </thead>
-    <tbody>
-      <!-- Aquí se llenará la tabla con los datos -->
+    <tbody id="tabla-productos">
       
     </tbody>
     
   </table>
 </div>
 
+<script>//Mostrar productos ingresados
+  fetch('./PHP/obtener_productos.php')
+  .then(response => response.json())
+  .then(data => {
+      const tablaProductos = document.getElementById('tabla-productos');
+      data.forEach(producto => {
+          const fila = document.createElement('tr');
+          fila.innerHTML = `
+              <td>${producto.id_producto}</td>
+              <td>${producto.nombre_producto}</td>
+              <td>${producto.creacion_fecha}</td>
+          `;
+          tablaProductos.appendChild(fila);
+      });
+  })
+  .catch(error => console.error('Error al obtener los productos:', error));</script>
 
   <script src="./script.js"></script>
 </body>
