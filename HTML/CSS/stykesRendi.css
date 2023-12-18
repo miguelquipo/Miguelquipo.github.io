@@ -89,9 +89,13 @@ li {
 }
 /*BARRA MENU*/
 
+.logo {
+  margin-right: auto; /* Mueve el logo hacia la izquierda */
+}
+
 header {
   display: flex;
-  align-items: center;
+  align-items: right;
   justify-content: space-between;
   padding: 10px 20px;
   background-color: #333;
@@ -118,7 +122,7 @@ header {
   width: 30px;
   height: 30px;
   color: #fff;
-  text-align: center;
+  text-align: left;
   line-height: 30px;
 }
 

@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ingreso de Rendimientos</title>
   <link rel="stylesheet" href="./CSS/stykesRendi.css">
 
@@ -14,8 +15,7 @@
 <body>
   <header>
     <div class="logo">
-      <!-- Aquí puede ir tu logo o nombre del sitio -->
-      <!-- ... -->
+    <img src="./A-IMG/_09cb5603-38b4-46b8-a159-454838b7f2e8.jpeg" alt="" height="50px">
     </div>
     <div class="menu-btn">
       <div class="menu-icon"></div>
@@ -23,34 +23,30 @@
     <div class="menu">
       <!-- Opción de Menú -->
       <a href="#"><i class="fas fa-home"></i> Inicio</a>
-      <a href="./ingProductos.html"><i class="fas fa-shopping-cart"></i> Ingreso de Productos</a>
+      <a href="./ingProductos1.html"><i class="fas fa-shopping-cart"></i> Ingreso de Productos</a>
       <a href="./rendimientos.html"><i class="fa-solid fa-clipboard"></i> Rendimientos</a>
     </div>
     <div class="user-login">
         <!-- Icono de Inicio de Sesión -->
-        <a href="./index.html"><i class="fas fa-user-circle"></i></a>
+        <a href="./ingPersonal.html"><i class="fas fa-user-circle"></i></a>
       </div>
 
   </header>
 
-  <h1>Ingreso de Rendimientos</h1>
+  <h1>Rendimientos</h1>
 
   <div class="container">
-    <form id="search-form">
+    <form id="insert-form" method="post" action="./PHP/rendimientos.php" >
       <div class="form-group">
         <label for="search-cedula">Número de Cédula:</label>
-        <input type="text" id="search-cedula" placeholder="Ingrese el número de cédula">
+        <input type="text" id="search-cedula" placeholder="Ingrese el número de cédula" maxlength="10" onkeydown="moveToNext(event, 'search-producto')">
       </div>
       <div class="form-group">
-        <label for="search-product-type" type="text">Tipo de Producto:</label>
-        <input type="text" id="search-producto" placeholder="Ingrese el número de cédula">
+        <label for="search-product-type">Código Producto:</label>
+        <input type="text" id="search-producto" placeholder="Ingrese el código de producto" maxlength="4" onkeydown="moveToNext(event, '')">
       </div>
-      <button type="button" onclick="searchRendimientos()">Buscar</button>
+      <button type="button" onclick="clearInputs()">Limpiar</button>
     </form>
-
-    <ul id="rendimientos-list">
-      <!-- Aquí se listarán los rendimientos -->
-    </ul>
   </div>
 
   <div class="table-container">
@@ -66,12 +62,99 @@
           <th>Hora</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="table-body">
         <!-- Aquí se llenará la tabla con los datos -->
-      </tbody>
+    </tbody>
     </table>
   </div>
 
-  <script src="./script.js"></script>
+  
+<script>
+  // Llama a la función para obtener los datos cuando se cargue la página
+  document.addEventListener('DOMContentLoaded', function() {
+      obtenerDatos();
+  });
+
+  function obtenerDatos() {
+      fetch('./PHP/obtener_rendimientos.php') // Archivo PHP que devuelve los datos en formato JSON
+          .then(response => response.json())
+          .then(data => {
+              mostrarDatosEnTabla(data);
+          })
+          .catch(error => {
+              console.error('Error al obtener los datos:', error);
+          });
+  }
+
+  function mostrarDatosEnTabla(data) {
+      const tableBody = document.getElementById('table-body');
+
+      // Limpiamos cualquier contenido previo en la tabla
+      tableBody.innerHTML = '';
+
+      // Iteramos sobre los datos y creamos las filas de la tabla
+      data.forEach(rendimiento => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+              <td>${rendimiento.id_rendimiento}</td>
+              <td>${rendimiento.cantidad_vendida}</td>
+              <td>${rendimiento.nombre_producto}</td>
+              <td>${rendimiento.nombre_trabajador}</td>
+              <td>${rendimiento.fecha_registro}</td>
+              <td>${rendimiento.hora_registro}</td>
+          `;
+          tableBody.appendChild(row);
+      });
+  }
+</script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('insert-form');
+        const cedulaInput = document.getElementById('search-cedula');
+        const productoInput = document.getElementById('search-producto');
+
+        // Agregar eventos input a los campos
+        cedulaInput.addEventListener('input', verificarCampos);
+        productoInput.addEventListener('input', verificarCampos);
+
+        function verificarCampos() {
+            if (cedulaInput.value.trim() !== '' && productoInput.value.trim() !== '') {
+                // Ambos campos están llenos, enviar formulario
+                form.submit();
+            }
+        }
+    });
+    function clearInputs() {
+    document.getElementById("search-cedula").value = '';
+    document.getElementById("search-producto").value = '';
+    document.getElementById("search-cedula").focus();
+  }
+    document.addEventListener('DOMContentLoaded', function() {
+    var cedulaInput = document.getElementById("search-cedula");
+    cedulaInput.focus();
+  });
+    function moveToNext(event, nextFieldId) {
+    var currentField = event.target;
+    var fieldValue = currentField.value.trim();
+    var key = event.key;
+
+    if (key === 'Enter' && fieldValue !== '') {
+      if (nextFieldId !== '') {
+        var nextField = document.getElementById(nextFieldId);
+        nextField.focus();
+
+        // Verificar si ambos campos están completos para enviar el formulario
+        var cedulaInput = document.getElementById("search-cedula").value.trim();
+        var productoInput = document.getElementById("search-producto").value.trim();
+
+        if (cedulaInput !== '' && productoInput !== '') {
+          document.getElementById("ingreso-form").submit(); // Envío del formulario
+        }
+      }
+    }
+  }
+</script>
 </body>
 </html>

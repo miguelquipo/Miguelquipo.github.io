@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD de Productos</title>
+  <link rel="stylesheet" href="./CSS/stylesInsertPrd.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+          <!-- Aquí puede ir tu logo o nombre del sitio -->
+          <!-- ... -->
+        </div>
+        <div class="menu-btn">
+          <div class="menu-icon"></div>
+        </div>
+        <div class="menu">
+          <!-- Opción de Menú -->
+          <a href="#"><i class="fas fa-home"></i> Inicio</a>
+          <a href="./ingProductos1.html"><i class="fas fa-shopping-cart"></i> Ingreso de Productos</a>
+          <a href="./rendimientos.html"><i class="fa-solid fa-clipboard"></i> Rendimientos</a>
+        </div>
+        <div class="user-login">
+          <!-- Icono de Inicio de Sesión -->
+          <a href="./ingPersonal.html" class="fas fa-user-circle"></i></a>
+        </div>
+
+      </header>
+      <h1>Ingreso Productos</h1>
+    <div class="container">
+    <form id="crud-form" method="post" action="./PHP/ingresoProd.php">
+    <div class="form-group">
+      <label for="product-code">Código</label>
+      <input type="text" id="product-code" name="product-code" placeholder="Código Producto (Máximo 4 dígitos)" maxlength="4" required>
+    </div>
+    <div class="form-group">
+      <label for="product-name">Nombre del Producto</label>
+      <input type="text" id="product-name" name="product-name" placeholder="Nombre del Producto" required>
+    </div>
+    <div class="form-group">
+      <label for="entry-date">Fecha de Creación</label>
+      <input type="datetime-local" id="entry-date" name="fecha-creacion">
+    </div>
+    <button type="submit">Agregar Producto</button>
+  </form>
+</div>
+
+    
+  
+</body>
+</html>
