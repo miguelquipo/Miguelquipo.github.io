@@ -22,7 +22,7 @@ if (isset($_POST['cedula'])) {
 $sql = "INSERT INTO trabajadores (nombre, apellido, cedula) VALUES ('$nombre', '$apellido', '$cedula')";
 
 if ($conn->query($sql) === TRUE) {
-    header("Location: ../ingProductos.html"); // Redirige a iingProductos.html si la inserción es exitosa
+    header("Location: ../ingPersonal.html"); // Redirige a iingProductos.html si la inserción es exitosa
     exit();
 } else {
     header("Location: ../index.html"); // Redirige a index.html si hay un error en la inserción

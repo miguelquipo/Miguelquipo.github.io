@@ -13,37 +13,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-  <header>
-    <div class="logo">
-    <img src="./A-IMG/_09cb5603-38b4-46b8-a159-454838b7f2e8.jpeg" alt="" height="50px">
+ 
+    <div class="return-container">
+      <a href="index.html" class="return-button"> <!-- Enlace a la página anterior -->
+        <i class="fas fa-arrow-left"></i>        
+      </a>
     </div>
-    <div class="menu-btn">
-      <div class="menu-icon"></div>
-    </div>
-    <div class="menu">
-      <!-- Opción de Menú -->
-      <a href="#"><i class="fas fa-home"></i> Inicio</a>
-      <a href="./ingProductos1.html"><i class="fas fa-shopping-cart"></i> Ingreso de Productos</a>
-      <a href="./rendimientos.html"><i class="fa-solid fa-clipboard"></i> Rendimientos</a>
-    </div>
-    <div class="user-login">
-        <!-- Icono de Inicio de Sesión -->
-        <a href="./ingPersonal.html"><i class="fas fa-user-circle"></i></a>
-      </div>
-
-  </header>
-
-  <h1>Rendimientos</h1>
 
   <div class="container">
-    <form id="insert-form" method="post" action="./PHP/rendimientos.php" >
+    <h1>Rendimientos</h1>
+    <form id="insert-form" method="post" action="./PHP/rendimientos.php">
       <div class="form-group">
         <label for="search-cedula">Número de Cédula:</label>
-        <input type="text" id="search-cedula" placeholder="Ingrese el número de cédula" maxlength="10" onkeydown="moveToNext(event, 'search-producto')">
+        <input type="text" id="search-cedula" name="search-cedula" placeholder="Ingrese el número de cédula" maxlength="10" onkeydown="moveToNext(event, 'search-producto')">
       </div>
       <div class="form-group">
         <label for="search-product-type">Código Producto:</label>
-        <input type="text" id="search-producto" placeholder="Ingrese el código de producto" maxlength="4" onkeydown="moveToNext(event, '')">
+        <input type="text" id="search-producto" name="search-producto" placeholder="Ingrese el código de producto" maxlength="4" onkeydown="moveToNext(event, '')">
       </div>
       <button type="button" onclick="clearInputs()">Limpiar</button>
     </form>
@@ -120,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         productoInput.addEventListener('input', verificarCampos);
 
         function verificarCampos() {
-            if (cedulaInput.value.trim() !== '' && productoInput.value.trim() !== '') {
+            if (cedulaInput.value.trim() !== '' && productoInput.value.trim() !== 'ingreso-form') {
                 // Ambos campos están llenos, enviar formulario
                 form.submit();
             }
