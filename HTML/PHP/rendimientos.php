@@ -51,7 +51,7 @@ if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST" &&
         $stmtUpdate->bind_param("ss", $idTrabajador, $idProducto);
 
         if ($stmtUpdate->execute()) {
-            header("Location: ../rendimeintos.html"); // Redirige a rendimeintos.html si la actualización es exitosa
+            header("Location: ../rendimientos.html"); // Redirige a rendimeintos.html si la actualización es exitosa
             exit();
         } else {
             echo "Error al actualizar cantidad vendida: " , $conn->error;
@@ -66,7 +66,7 @@ if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST" &&
         $stmtInsert->bind_param("issss", $cantidadVendida, $fechaRegistro, $idProducto, $idTrabajador, $horaRegistro);
 
         if ($stmtInsert->execute()) {
-            header("Location: ../rendimeintos.html"); // Redirige a rendimeintos.html si la inserción es exitosa
+            header("Location: ../rendimientos.html"); // Redirige a rendimeintos.html si la inserción es exitosa
             exit();
         } else {
             echo "Error al insertar datos: " , $conn->error;
