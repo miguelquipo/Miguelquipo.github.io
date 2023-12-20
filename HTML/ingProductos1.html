@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-  
+  <img src="./A-IMG/logo_prueba.png" alt="Logo de la empresa" class="logo">
+    
     <div class="menu">
       <!-- Resto de los botones aquí -->
     </div>
@@ -32,7 +33,63 @@
   </form>
 </div>
 
-    
+
+  <!-- Tabla -->
+  <div class="table-container">
+    <h2>Tabla de Productos</h2>
+    <table id="productos-table">
+      <thead>
+        <tr>
+          <th>ID del Producto</th>
+          <th>Nombre del Producto</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- Aquí se llenará la tabla con los datos -->
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="version-tag">
+    <p>Versión 0.1</p>
+  </footer>
+  
+</div>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    obtenerDatos();
+});
+
+function obtenerDatos() {
+    fetch('./PHP/obtener_productos.php') // Archivo PHP que devuelve los datos en formato JSON
+        .then(response => response.json())
+        .then(data => {
+            mostrarDatosEnTabla(data);
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
+}
+
+function mostrarDatosEnTabla(data) {
+    const tableBody = document.getElementById('table-body');
+
+    // Limpiamos cualquier contenido previo en la tabla
+    tableBody.innerHTML = '';
+
+    // Iteramos sobre los datos y creamos las filas de la tabla
+    data.forEach(producto => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${producto.id_producto}</td>
+            <td>${producto.nombre_producto}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+   </script> 
   
 </body>
 </html>

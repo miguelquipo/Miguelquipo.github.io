@@ -47,15 +47,18 @@ if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST" &&
 
     if ($resultCheck->num_rows > 0) {
         // Si ya existe un registro, incrementa la cantidad vendida
-        $stmtUpdate = $conn->prepare("UPDATE rendimiento SET cantidad_vendida = cantidad_vendida + 1 WHERE id_trabajador = ? AND id_producto = ?");
-        $stmtUpdate->bind_param("ss", $idTrabajador, $idProducto);
+        $stmtUpdate = $conn->prepare("UPDATE rendimiento SET cantidad_vendida = cantidad_vendida + 1, fecha_registro = ?, hora_registro = ? WHERE id_trabajador = ? AND id_producto = ?");
+    
+        $fechaRegistro = date("Y-m-d");
+        $horaRegistro = date("H:i:s");
+        $stmtUpdate->bind_param("ssss", $fechaRegistro, $horaRegistro, $idTrabajador, $idProducto);
 
-        if ($stmtUpdate->execute()) {
-            header("Location: ../rendimientos.html"); // Redirige a rendimeintos.html si la actualización es exitosa
-            exit();
-        } else {
-            echo "Error al actualizar cantidad vendida: " , $conn->error;
-        }
+    if ($stmtUpdate->execute()) {
+        header("Location: ../rendimientos.html"); // Redirige a rendimeintos.html si la actualización es exitosa
+        exit();
+    } else {
+        echo "Error al actualizar cantidad vendida: ", $conn->error;
+    }
     } else {
         // Si no existe, realiza la inserción de un nuevo registro
         $fechaRegistro = date("Y-m-d");

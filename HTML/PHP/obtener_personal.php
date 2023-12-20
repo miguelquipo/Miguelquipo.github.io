@@ -7,8 +7,8 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-// Consulta SQL para obtener los productos
-$sql = "SELECT id_producto, nombre_producto FROM productos";
+
+$sql = "SELECT id_trabajador,nombre,apellido,cedula FROM Trabajadores";
 $result = $conn->query($sql);
 
 $productos = array();
